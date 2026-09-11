@@ -50,7 +50,11 @@ merge(local.vpc, {
 ${i["name"]} ansible_host=${i["network_interface"][0]["nat_ip_address"] platform_id=${i["platform_id "]}}
 %{~ endfor ~}
 ``
+
+
 Стало:
+
+
 ``
 [webservers]
 %{ for i in webservers ~}
