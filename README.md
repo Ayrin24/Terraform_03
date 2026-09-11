@@ -23,16 +23,32 @@
 <img width="665" height="331" alt="image" src="https://github.com/user-attachments/assets/bab0fb5b-735f-48ab-adbf-b9c51855f9ff" />
 
 Задание 7
-
+``
 merge(local.vpc, {
   for k, v in local.vpc :
   k => [for i, x in v : x if i != 2] if can(tolist(v))
 })
-
+``
 Либо
-
+``
 merge(local.vpc, {
   subnet_ids   = [for i, v in local.vpc.subnet_ids   : v if i != 2]
   subnet_zones = [for i, v in local.vpc.subnet_zones : v if i != 2]
 })
+``
+Задание 8
+Было:
 
+``
+[webservers]
+%{~ for i in webservers ~}
+${i["name"]} ansible_host=${i["network_interface"][0]["nat_ip_address"] platform_id=${i["platform_id "]}}
+%{~ endfor ~}
+``
+Стало:
+``
+[webservers]
+%{ for i in webservers ~}
+${i["name"]} ansible_host=${i["network_interface"][0]["nat_ip_address"]} platform_id=${i["platform_id"]}
+%{ endfor ~}
+``
