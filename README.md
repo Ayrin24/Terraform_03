@@ -17,3 +17,22 @@
 Задание 4.
 
 <img width="672" height="173" alt="image" src="https://github.com/user-attachments/assets/7970fde5-f08b-4153-a08c-71bf94e2025d" />
+
+Задание 5.
+
+<img width="665" height="331" alt="image" src="https://github.com/user-attachments/assets/bab0fb5b-735f-48ab-adbf-b9c51855f9ff" />
+
+Задание 7
+
+merge(local.vpc, {
+  for k, v in local.vpc :
+  k => [for i, x in v : x if i != 2] if can(tolist(v))
+})
+
+Либо
+
+merge(local.vpc, {
+  subnet_ids   = [for i, v in local.vpc.subnet_ids   : v if i != 2]
+  subnet_zones = [for i, v in local.vpc.subnet_zones : v if i != 2]
+})
+
